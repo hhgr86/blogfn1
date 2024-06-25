@@ -1,0 +1,9 @@
+<h3>Все наши посты</h3>
+<% @post.each do |post| %>
+    <div class = "well">
+        <h2><%= post.title%> </h2>
+        <p><%= post.dody%></p>
+        <%= link_to "Читать далее", post_path(post), :class => 'btn
+        btn-default' %>
+    </div>
+<%end%>

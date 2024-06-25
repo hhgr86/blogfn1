@@ -1,0 +1,33 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.dody %></p>
+<hr>
+<%= link_to "Редактировать", edit_post_path(@post), class: 'btn btn-warning' %>
+<%= link_to "Удалить", post_path(@post), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    }, class: 'btn btn-danger' %>
+<hr>
+<h3>Все Комментарии</h3>
+<% @post.comments.each do |comment| %>
+    <div class = "well">
+        <p><strong><%=comment.username%></strong>: <%=comment.dody%></p>
+    </div>
+<%end%>
+<hr>
+<h2>Добавление Комментария</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+    
+    <p>
+        Пользователь<br>
+        <%= f.text_field(:username, {:class=>'form-control'}) %>
+    </p>
+
+    <p>
+        Текст комментария<br>
+        <%= f.text_area :dody %>
+    </p>
+
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
